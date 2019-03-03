@@ -11,8 +11,47 @@ class Register extends React.Component {
       email: '',
       password: '',
       passwordConfirmation: '',
+      errors: [],
+      loading: false
     }
   }
+
+  isFormValid = () => {
+    let errors = [];
+    let error;
+
+    if ( this.isFormEmpty( this.state ) ) {
+      // Handle error
+      error = { message: 'Fill in all fields' };
+      this.setState({
+        errors: errors.concat(error)
+      });
+      return false;
+    } else if ( !this.isPasswordValid( this.state ) ) {
+      // Handle error
+      error = { message: 'Password is invalid' };
+      this.setState({
+        errors: errors.concat(error)
+      });
+    } else {
+      // Form is valid
+      return true;
+    }
+  }
+
+  isFormEmpty = ({ username, email, password, passwordConfirmation }) => {
+    return !username.length || !email.length || !password.length || !passwordConfirmation.length;
+  }
+
+  isPasswordValid = ({ password, passwordConfirmation }) => {
+    if ( password !== passwordConfirmation ) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  displayErrors = (errors) => errors.map( (err, i) => <p key={i}>{ err.message }</p>);
 
   handleChange = (e) => {
     this.setState({
@@ -22,17 +61,45 @@ class Register extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    firebase.auth().createUserWithEmailAndPassword( this.state.email, this.state.password)
-    .then( (createdUser) => {
-      console.log( createdUser );
-    })
-    .catch( (err) => {
-      console.error(err);
-    });
+    if ( this.isFormValid() ){
+      this.setState({
+        errors: [],
+        loading: true
+      });
+      firebase.auth().createUserWithEmailAndPassword( this.state.email, this.state.password)
+      .then( (createdUser) => {
+        console.log( createdUser );
+        this.setState({
+          loading: false
+        });
+      })
+      .catch( (err) => {
+        console.error(err);
+        this.setState({
+          errors: this.state.errors.concat(err),
+          loading: false
+        })
+      });
+    }
+  }
+
+  handleInputError = ( errors, inputName ) => {
+    // Check if the error message relates to an email or password field.
+    // Adds 'error' to the className of the calling field, the field will then display a red background.
+    return errors.some( error => error.message.toLowerCase().includes(inputName)) ? 'error' : '';
   }
 
   render () {
-    const { username, email, password, passwordConfirmation } = this.state;
+    const { username, email, password, passwordConfirmation, errors, loading } = this.state;
+    let errMsg;
+
+    // If there are any errors, they will be displayed in a box below the form.
+    if ( errors.length > 0 ) {
+      errMsg =  (<Message error>
+                  <h3>Error</h3>
+                    { this.displayErrors( errors )}
+                </Message>);
+    }
 
     return (
       <Grid textAlign="center" verticalAlign="middle" className="app">
@@ -59,6 +126,7 @@ class Register extends React.Component {
               icon="mail"
               iconPosition="left"
               placeholder="Email"
+              className={ this.handleInputError( errors, 'email' ) }
               onChange={ this.handleChange } />
 
               <Form.Input fluid
@@ -68,6 +136,7 @@ class Register extends React.Component {
               icon="lock"
               iconPosition="left"
               placeholder="Password"
+              className={ this.handleInputError( errors, 'password' ) }
               onChange={ this.handleChange } />
 
               <Form.Input fluid
@@ -77,14 +146,19 @@ class Register extends React.Component {
               icon="repeat"
               iconPosition="left"
               placeholder="Password Confirmation"
+              className={ this.handleInputError( errors, 'password' ) }
               onChange={ this.handleChange } />
 
               <Button fluid
+              className={ loading ? 'loading' : '' }
+              disabled={ loading }
               color="orange"
               size="large">
               Submit</Button>
             </Segment>
           </Form>
+          { /* If there are any errors, they will be rendered here. */ }
+          { errMsg }
           <Message>Already a user? <Link to="/login">Login</Link></Message>
         </Grid.Column>
       </Grid>

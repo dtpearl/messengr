@@ -4,7 +4,7 @@ import 'firebase/database';
 import 'firebase/storage';
 
 var config = {
-  apiKey: "AIzaSyCAPuc9Lku7mIoRXvrzCd_sDenxrdSsRZI",
+  apiKey: "AIzaSyA7pI7Wh8wfoKMvolAS89qla2xKJe17cxI",
   authDomain: "dtpearl-messengr.firebaseapp.com",
   databaseURL: "https://dtpearl-messengr.firebaseio.com",
   projectId: "dtpearl-messengr",
