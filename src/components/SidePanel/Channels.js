@@ -33,7 +33,7 @@ class Channels extends React.Component {
   }
 
   removeListeners = () => {
-    this.state.channelRef.off();
+    this.state.channelsRef.off();
   }
 
   setFirstChannel = () => {
@@ -102,7 +102,7 @@ class Channels extends React.Component {
         # { channel.name }
       </Menu.Item>
     ))
-  )
+  );
 
   isFormValid = ({ channelName, channelDetails }) => channelName && channelDetails;
 
@@ -115,7 +115,7 @@ class Channels extends React.Component {
 
     return (
       <React.Fragment>
-        <Menu.Menu style={{ paddingBottom: '2em' }}>
+        <Menu.Menu className="menu">
           <Menu.Item>
             <span>
               <Icon name="exchange" /> CHANNELS
