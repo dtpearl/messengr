@@ -53,6 +53,7 @@ class FileModal extends React.Component {
           <Button
             color="green"
             inverted
+            onClick={ this.sendFile }
           >
             <Icon name="checkmark" /> Send
           </Button>
