@@ -30,9 +30,10 @@ class UserPanel extends React.Component {
 
   render () {
     const { user } = this.state;
+    const { primaryColor } = this.props;
 
     return (
-      <Grid style={{ background: '#4c3c4c'}}>
+      <Grid style={{ background: primaryColor }}>
         <Grid.Column>
           {/* App Header */}
           <Grid.Row style={{ padding: '1.2em', margin: 0 }}>
@@ -50,7 +51,7 @@ class UserPanel extends React.Component {
                 </span>
               } options={ this.dropdownOptions() }/>
             </Header>
-          </Grid.Row>          
+          </Grid.Row>
         </Grid.Column>
       </Grid>
     );
