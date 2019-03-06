@@ -11,7 +11,7 @@
 
 /* Messages.js */
 .messages {
-  height: 70vh;
+  height: 55vh;
   overflow-y: scroll;
 }
 
@@ -23,6 +23,7 @@
   left: 0;
   right: 1em;
   z-index: 200;
+  max-height: 20vh;
 }
 
 /* Message.js */
