@@ -1,6 +1,9 @@
 import React from 'react';
 import uuidv4 from 'uuid/v4';
-import { Segment, Button, Input } from 'semantic-ui-react';
+import mime from 'mime-types';
+
+import Picker from 'react-giphy-component';
+import { Segment, Button, Input, Modal, Grid } from 'semantic-ui-react';
 import firebase from '../../firebase';
 import FileModal from './FileModal';
 import ProgressBar from './ProgressBar';
@@ -16,7 +19,10 @@ class MessageForm extends React.Component {
     user: this.props.currentUser,
     loading: false,
     errors: [],
-    modal: false
+    modal: false,
+    giphyAPIKey: '6yZRuOUDVP1QCgg49Pi4X6MVPL3O3mA4',
+    gifVisible: false,
+    gifFile: ''
   }
 
   openModal = () => this.setState({ modal: true });
@@ -80,7 +86,7 @@ class MessageForm extends React.Component {
   uploadFile = ( file, metadata ) => {
     const pathToUpload = this.state.channel.id;
     const ref = this.props.getMessagesRef();
-    const filePath = `${this.getPath()}/${uuidv4()}.jpg`;
+    const filePath = (metadata.contentType === 'image/gif') ? `${this.getPath()}/${uuidv4()}.gif` : `${this.getPath()}/${uuidv4()}.jpg`;
 
     this.setState({
       uploadState: 'uploading',
@@ -129,43 +135,60 @@ class MessageForm extends React.Component {
     })
   }
 
+  log (gif) {
+    const file = gif.original.url;
+    const metadata = { contentType: mime.lookup(file) };
+    console.log(file);
+    //this.uploadFile(file, metadata);
+  }
+
   render () {
-    const { errors, message, loading, modal, uploadState, percentUploaded } = this.state;
+    const { errors, message, loading, modal, uploadState, percentUploaded, giphyAPIKey, gifVisible } = this.state;
 
     return (
       <Segment className="message__form">
-        <Input
-          fluid
-          name="message"
-          onChange={ this.handleChange }
-          value={ message }
-          style={{ marginBottom: '0.7em'}}
-          label={<Button icon={'add'} />}
-          labelPosition="left"
-          className={
-            errors.some( error => error.message.includes('message')) ? 'error' : ''
-          }
-          placeholder="Write your message"
-        />
-        <Button.Group icon widths="2">
-          <Button
-            onClick={ this.sendMessage }
-            disabled={ loading }
-            color="orange"
-            content="Add Reply"
+        <Grid columns={2} stackable >
+          <Grid.Column width={10}>
+          <Input
+            fluid
+            name="message"
+            onChange={ this.handleChange }
+            value={ message }
+            style={{ marginBottom: '0.7em' }}
+            label={<Button icon={'add'} />}
             labelPosition="left"
-            icon="edit"
+            className={
+              errors.some( error => error.message.includes('message')) ? 'error' : ''
+            }
+            placeholder="Write your message"
           />
-          <Button
-          color="teal"
-          disabled={ uploadState === 'uploading' }
-          onClick={ this.openModal }
-          content="Upload Media"
-          labelPosition="right"
-          icon="cloud upload"
+          <Button.Group icon widths="3">
+            <Button
+              onClick={ this.sendMessage }
+              disabled={ loading }
+              color="orange"
+              content="Add Reply"
+              labelPosition="left"
+              icon="edit"
+            />
+            <Button
+            color="teal"
+            disabled={ uploadState === 'uploading' }
+            onClick={ this.openModal }
+            content="Upload Media"
+            labelPosition="left"
+            icon="cloud upload"
+            />
+          </Button.Group>
+          </Grid.Column>
+          <Grid.Column width={6}>
+          <Picker
+            onSelected={this.log.bind(this)}
+            apiKey={ giphyAPIKey }
+            className="gifPicker"
           />
-
-        </Button.Group>
+          </Grid.Column>
+        </Grid>
         <FileModal
         modal={ modal }
         closeModal={ this.closeModal }
@@ -175,6 +198,7 @@ class MessageForm extends React.Component {
           uploadState={ uploadState }
           percentUploaded={ percentUploaded }
         />
+
       </Segment>
     )
   }
