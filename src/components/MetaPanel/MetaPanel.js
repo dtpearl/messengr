@@ -39,7 +39,7 @@ class MetaPanel extends React.Component {
             { channel && channel.details }
           </Accordion.Content>
 
-          <Accordion.Title
+          {/*<Accordion.Title
             active={ activeIndex === 1 }
             index={1}
             onClick={ this.setActiveIndex }
@@ -50,7 +50,7 @@ class MetaPanel extends React.Component {
           </Accordion.Title>
           <Accordion.Content active={ activeIndex === 1 }>
             posters
-          </Accordion.Content>
+          </Accordion.Content>*/}
 
           <Accordion.Title
             active={ activeIndex === 2 }
