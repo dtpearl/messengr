@@ -21,8 +21,6 @@ class MessageForm extends React.Component {
     errors: [],
     modal: false,
     giphyAPIKey: '6yZRuOUDVP1QCgg49Pi4X6MVPL3O3mA4',
-    gifVisible: false,
-    gifFile: ''
   }
 
   openModal = () => this.setState({ modal: true });
@@ -137,13 +135,13 @@ class MessageForm extends React.Component {
 
   log (gif) {
     const file = gif.original.url;
-    const metadata = { contentType: mime.lookup(file) };
-    console.log(file);
+    this.setState({ message: file });
+    this.sendMessage();
     //this.uploadFile(file, metadata);
   }
 
   render () {
-    const { errors, message, loading, modal, uploadState, percentUploaded, giphyAPIKey, gifVisible } = this.state;
+    const { errors, message, loading, modal, uploadState, percentUploaded, giphyAPIKey } = this.state;
 
     return (
       <Segment className="message__form">

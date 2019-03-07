@@ -141,16 +141,16 @@ class Messages extends React.Component {
     this.setState({ numUniqueUsers });
   }
 
-  displayMessages = messages => (
-    messages.length > 0 && messages.map( message => (
+  displayMessages = messages =>
+    messages.length > 0 &&
+    messages.map(message => (
       <Message
-        className="message"
-        key={ message.timestamp }
-        message={ message }
-        user={ this.state.user }
+        key={message.timestamp}
+        message={message}
+        user={this.state.user}
       />
-    ))
-  )
+    ));
+
 
   displayChannelName = channel => {
     return channel ? `${ this.state.privateChannel ? '@' : '#' }${ channel.name }` : '';
