@@ -1,9 +1,8 @@
 import React from 'react';
 import uuidv4 from 'uuid/v4';
-import mime from 'mime-types';
 
 import Picker from 'react-giphy-component';
-import { Segment, Button, Input, Modal, Grid } from 'semantic-ui-react';
+import { Segment, Button, Input, Grid } from 'semantic-ui-react';
 import firebase from '../../firebase';
 import FileModal from './FileModal';
 import ProgressBar from './ProgressBar';

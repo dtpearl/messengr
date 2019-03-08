@@ -73,3 +73,9 @@ body,
 .giphy-picker {
   height: 165px !important;
 }
+
+.giphy-picker:hover {
+  top: -300px;
+  height: 400px !important;
+  transition: 0.7s;
+}
