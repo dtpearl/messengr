@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import uuidv4 from 'uuid/v4';
 
 import Picker from 'react-giphy-component';
@@ -183,6 +183,7 @@ class MessageForm extends React.Component {
             onSelected={this.log.bind(this)}
             apiKey={ giphyAPIKey }
             className="gifPicker"
+            width={300}
           />
           </Grid.Column>
         </Grid>
