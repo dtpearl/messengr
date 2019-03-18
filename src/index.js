@@ -24,9 +24,9 @@ class Root extends React.Component {
     firebase.auth().onAuthStateChanged( user => {
       if ( user ) {
         this.props.setUser(user);
-        this.props.history.push('/messengr/');
+        this.props.history.push('/');
       } else {
-        this.props.history.push('/messengr/login');
+        this.props.history.push('/login');
         this.props.clearUser();
       }
     })
@@ -35,9 +35,9 @@ class Root extends React.Component {
   render () {
     return this.props.isLoading ? <Spinner /> : (
         <Switch>
-          <Route exact path="/messengr/" component={ App } />
-          <Route path="/messengr/login" component={ Login } />
-          <Route path="/messengr/register" component={ Register } />
+          <Route exact path="/" component={ App } />
+          <Route path="/login" component={ Login } />
+          <Route path="/register" component={ Register } />
         </Switch>
     );
   }
