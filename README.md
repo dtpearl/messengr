@@ -1,68 +1,46 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# messengr
 
-## Available Scripts
+## A web based Slack-like app built using React, Redux and Firebase.
 
-In the project directory, you can run:
+## Link to messengr
 
-### `npm start`
+The page is hosted [here](https://dtpearl.github.io/messengr) on GitHub.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This web version of a Slack-like messenger app. It uses a React Client and Firebase Server to recreate the extremely popular group messaging service. It integrates with Giphy's API to give it the GIF centered heart that is essential to any group chat service.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Users are authenticated through Firebase and messages can be text, personal uploaded images or GIFs from Giphy.
 
-### `npm test`
+Other notable features:
+- Automatically generated avatars for each user.
+- Users can change their avatars by uploading their own image.
+- Create new channels and specify the topic of each channel.
+- Change the background colors for their own app page.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Interesting learning experiences  
 
-### `npm run build`
+My main goal for this project was to gain a deeper understanding of React. I think I was successful in this and I am very happy with the end result.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+I was very happy when I was successful in getting GIFs to be shared to Firebase without having to upload the individual GIFs. Since they are already online, storing them on Firebase would have been unnecessary. To achieve this I sent the GIF URL as a text message, then when a message is rendered I check if it is a GIF and display it as an image, using the GIF URL as the img src.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+### Noteable Dependencies:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+These were some of the dependencies required for this build.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- firebase
+- mime-types
+- react-avatar-editor
+- react-giphy-component 
+- semantic-ui-css
+- semantic-ui-react
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Future goal/plans
 
-## Learn More
+- Add the last essential piece to any messaging app, emojis.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Link to the game
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+The page is hosted [here](https://dtpearl.github.io/messengr) on github.
