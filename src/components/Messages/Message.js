@@ -8,7 +8,7 @@ const isOwnMessage = ( message, user ) => {
 
 const isImage = ( message ) => {
   if (message.hasOwnProperty("content")){
-    if (message.content.endsWith("gif")){
+    if (message.content.endsWith("giphy.gif")){
       message.image = message.content;
       return true;
     }
