@@ -53,7 +53,7 @@ const RootWithAuth = withRouter(connect( mapStateFromProps, { setUser, clearUser
 
 ReactDOM.render(
   <Provider store={ store }>
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <RootWithAuth />
     </Router>
   </Provider>, document.getElementById('root'));
