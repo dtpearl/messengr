@@ -22,7 +22,10 @@
     "redux-devtools-extension": "^2.13.5",
     "semantic-ui-css": "^2.3.3",
     "semantic-ui-react": "^0.82.1",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "js-yaml": ">=3.13.1",
+    "braces": ">=2.3.1",
+    "webpack-dev-server": ">=3.1.11"
   },
   "scripts": {
     "start": "react-scripts start",
