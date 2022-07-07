@@ -8,7 +8,7 @@
     "firebase": "^5.8.5",
     "md5": "^2.2.1",
     "mime-types": "^2.1.22",
-    "moment": "^2.22.2",
+    "moment": "^2.29.4",
     "react": "^16.8.4",
     "react-avatar-editor": "^11.0.4",
     "react-color": "^2.14.1",
